@@ -34,29 +34,25 @@
         color: #aaaaaa;
         font-weight: 700;
 
-        &-info-group {
+        &-group {
             display: flex;
             max-width: 240px;     
             justify-content: space-between;
             position: relative;
-            align-items: center;
             margin-bottom: 8px;
+
+            &:last-child {
+                max-width: 350px;
+            }
         }
 
-        &-info, &-genre, img {
-            max-height: 19.64px;
+        &-info {
+            height: 20px;
             border-radius: 4px;
         }
         
         &:nth-child(2) {
             margin: 0 12px;
         }
-    }
-
-    &__movie-genres-group {
-        position: relative;
-        max-width: 350px;
-        display: flex;
-        justify-content: space-between;
     }
 }
