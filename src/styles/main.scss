@@ -1,0 +1,18 @@
+@use 'hero';
+@use 'tabs';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    background-color: #00050d;
+    padding-bottom: 120px;
+}
+
+section {
+    padding: 0 calc(3.5vw + 24px);
+}

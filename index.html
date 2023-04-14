@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./dist/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <section class="hero">
+        <h1 class="hero__branding">
+            <img class="hero__branding-image" src="./src/images/logo.png" alt="">
+        </h1>
+        <p class="hero__text">
+            As consequências devastadoras dos atos de Thanos, que dizimaram metade das criaturas do universo e destruíram os Vingadores, leva os heróis remanescentes a tomarem uma atitude final na grande conclusão da sequência de vinte dois filmes da Marvel Studios, "Vingadores: Ultimato”
+        </p>
+        <div class="hero__movie-metadata">
+            <div class="hero__movie-metadata-info-group">
+                <span class="hero__movie-metadata-info">IMDb 8,4</span>
+                <span class="hero__movie-metadata-info">3 h 3 min</span>
+                <span class="hero__movie-metadata-info">2019</span>
+                <span class="hero__movie-metadata-info">
+                    <img src="src/images/12+_icon.png" alt="">
+                </span>
+            </div>
+            <div class="hero__movie-genres-group">
+                <span class="hero__movie-genre">Ficção científica</span>
+                <span class="hero__movie-genre">Drama</span>
+                <span class="hero__movie-genre">Ambicioso</span>
+                <span class="hero__movie-genre">Divertido</span>
+            </div>
+        </div>
+    </section>
+    <section class="tabs">
+        <div class="tabs__navegation">
+            <div class="tabs__buttons-group">
+                <button data-tab-button="related" class="tabs__button tabs__button--is-active">Relacionados</button>
+                <button data-tab-button="details" class="tabs__button">Detalhes</button>
+            </div>
+        </div>
+        <div data-tab-id="related" class="tabs__tab tabs__tab--show">
+            <h2 class="tabs__tab-name">Outros usuários também assistiram</h2>
+            <hr>
+            <br>
+            <ul class="tabs__tab-content">
+                <li class="tabs__tab-item">
+                    <a class="tabs__tab-link" href="#">
+                        <img class="tabs__tab-image" src="src/images/other-movies/movie1.webp" alt="">
+                    </a>
+                </li>
+                <li class="tabs__tab-item">
+                    <a class="tabs__tab-link" href="#">
+                        <img class="tabs__tab-image" src="src/images/other-movies/movie2.webp" alt="">
+                    </a>
+                </li>
+                <li class="tabs__tab-item">
+                    <a class="tabs__tab-link" href="#">
+                        <img class="tabs__tab-image" src="src/images/other-movies/movie3.webp" alt="">
+                    </a>
+                </li>
+                <li class="tabs__tab-item">
+                    <a class="tabs__tab-link" href="#">
+                        <img class="tabs__tab-image" src="src/images/other-movies/movie4.webp" alt="">
+                    </a>
+                </li>
+                <li class="tabs__tab-item">
+                    <a class="tabs__tab-link" href="#">
+                        <img class="tabs__tab-image" src="src/images/other-movies/movie5.webp" alt="">
+                    </a>
+                </li>
+                <li class="tabs__tab-item">
+                    <a class="tabs__tab-link" href="#">
+                        <img class="tabs__tab-image" src="src/images/other-movies/movie6.webp" alt="">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div data-tab-id="details" class="tabs__tab">
+            <h2 class="tabs__tab-name">Detalhes</h2>
+            <hr>
+            <br>
+            <div class="tabs__tab-content">
+                <div class="tabs__left-column">
+                    <p>
+                        No final épico da Saga do Infinito, os Vingadores enfrentam o vilão mais poderoso do universo, Thanos. Quando eventos devastadores eliminam metade da população mundial e dividem suas fileiras, o resto dos heróis lutam para avançar. Mas eles devem se unir para restaurar a ordem e a harmonia no universo e trazer de volta seus entes queridos. Algumas sequências ou padrões de luz intermitente podem afetar telespectadores fotossensíveis.
+                    </p>
+                </div>
+                <div class="tabs__rigth-column">
+                    <div class="tabs__rigth-column-left">
+                        <div class="tabs__info-group">
+                            <p class="tabs__info-name">Duração:</p>
+                            <p class="tabs__info">3h 5min</p>
+                        </div>
+                        <div class="tabs__info-group">
+                            <p class="tabs__info-name">Data de lançamento:</p>
+                            <p class="tabs__info">2019</p>
+                        </div>
+                        <div class="tabs__info-group">
+                            <p class="tabs__info-name">Gênero:</p>
+                            <p class="tabs__info">Ficção científica, Fantasia, Super-Heróis, Ação e aventura</p>
+                        </div>
+                        <div class="tabs__info-group">
+                            <p class="tabs__info-name">Classificação:</p>
+                            <img class="tabs__info-img" src="src/images/12+_icon.png" alt="">
+                            <p class="tabs__info">Violência</p>
+                            <p class="tabs__info">Drogas Lícitas</p>
+                        </div>
+                    </div>
+                    <div class="tabs__rigth-column-right">
+                        <div class="tabs__info-group">
+                            <p class="tabs__info-name">Direção:</p>
+                            <p class="tabs__info">Anthony Russo, Joe Russo</p>
+                        </div>
+                        <div class="tabs__info-group">
+                            <p class="tabs__info-name">Elenco:</p>
+                            <p class="tabs__info">Robert Downey Jr.</p>
+                            <p class="tabs__info">Chris Evans</p>
+                            <p class="tabs__info">Mark Ruffalo</p>
+                            <p class="tabs__info">Chris Hemsworth</p>
+                            <p class="tabs__info">Scarlett Johansson</p>
+                            <p class="tabs__info">Jeremy Renner</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="src/scripts/main.js"></script>
+</body>
+</html>
