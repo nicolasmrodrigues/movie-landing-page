@@ -1,5 +1,6 @@
 @use 'hero';
 @use 'tabs';
+@use 'footer';
 
 * {
     padding: 0;
@@ -13,9 +14,10 @@ ul {
 
 body {
     background-color: #00050d;
-    padding-bottom: 120px;
+    padding-bottom: 30px;
+    font-family: Roboto, sans-serif;
 }
 
-section {
+section, footer {
     padding: 0 calc(3.5vw + 24px);
 }

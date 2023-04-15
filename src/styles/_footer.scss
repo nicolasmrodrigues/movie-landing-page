@@ -1,0 +1,31 @@
+.footer {
+    margin-top: 180px;
+
+    &__container {
+        text-align: center;
+    }
+
+    &__logo {
+        display: block;
+        margin: 0 auto;
+        max-width: 130px;
+        max-height: 130px;
+    }
+
+    &__link-list {
+        display: inline-flex;
+        text-align: left;
+    }
+
+    &__link {
+        color: #4980d7;
+        text-decoration: none;
+        margin-right: 10px;
+
+    }
+
+    &__text {
+        margin-top: 8px;
+        color: #7b8faf;
+    }
+}
