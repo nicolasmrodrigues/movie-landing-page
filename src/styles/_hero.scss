@@ -2,10 +2,11 @@
     font-family: Roboto, sans-serif;
     padding-top: 120px;
     user-select: none;
+    height: 100vh;
+
     * {
         position: relative;
     }
-    height: 90vh;
 
     &__title {
         color: #f9f9f9;
@@ -31,32 +32,6 @@
         display: flex;
         max-width: 350px;
         justify-content: space-between;
-    }
-
-    &__button {
-        padding: 13px 8px;
-        text-transform: uppercase;
-        background-color: #255db7;
-        border: none;
-        border-radius: 4px;
-        letter-spacing: 1px;
-        font: inherit;
-        color: #f9f9f9;
-        cursor: pointer;
-        transition: background-color .2s ease;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-
-        &:hover {
-            background-color: lighten(#255db7, 7%);
-        }
-
-        &--dark {
-            background-color: #29292d;
-
-            &:hover {
-                background-color: #242427;
-            }
-        }
     }
 
     &__branding-image {

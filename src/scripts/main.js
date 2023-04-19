@@ -1,5 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {    
     const buttons = document.querySelectorAll('[data-tab-button]')
+    const langOptions = document.getElementsByClassName('lang-option')
+    
+    for (let x = 0; x < langOptions.length; x++) {
+        langOptions[x].addEventListener('click', function() {
+            for (let y = 0; y < langOptions.length; y++) {
+                langOptions[y].classList.remove('selected')
+            }
+            langOptions[x].classList.add('selected')
+            defineLangAbbr();
+        })
+    }
+
+    defineLangAbbr();
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function(button) {
@@ -26,5 +39,15 @@ function removeActiveButton() {
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove('tab-navegation-button--is-active');
+    }
+}
+
+function defineLangAbbr() {
+    const langText = document.getElementsByClassName('lang-abbr')[0]
+    lang = document.getElementsByClassName('selected')[0].innerHTML
+    if (lang == 'Português') {
+        langText.innerHTML = 'PT'
+    } else {
+        langText.innerHTML = 'EN'
     }
 }
