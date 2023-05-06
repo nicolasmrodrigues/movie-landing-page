@@ -13,10 +13,14 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^3.0.0"
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^3.0.0"
   },
   "dependencies": {
+    "gulp-imagemin": "^7.1.0",
     "sass": "^1.61.0"
   }
 }
