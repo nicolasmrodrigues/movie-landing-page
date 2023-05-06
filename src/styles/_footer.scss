@@ -15,6 +15,11 @@
     &__link-list {
         display: inline-flex;
         text-align: left;
+
+        @media (max-width: 768px) {
+            display: block;
+            text-align: center;
+        }
     }
 
     &__link {
@@ -22,6 +27,12 @@
         text-decoration: none;
         margin: 0 8px;
         transition: color .2s ease-in-out;
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+            line-height: 24px;
+            display: block;
+        }
         
         &:hover {
             color: lighten(#4980d7, 10%);
@@ -32,5 +43,10 @@
     &__text {
         margin-top: 8px;
         color: #7b8faf;
+
+        @media (max-width: 768px) {
+            font-size: 14px;
+            line-height: 24px;
+        }
     }
 }

@@ -12,6 +12,10 @@
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, .5);
 
+    @media (max-width: 768px) {
+        display: none;
+    }
+
     .header, &-navegation, &-navegation__list, .header-navegation__item {
         height: 70px;
     }

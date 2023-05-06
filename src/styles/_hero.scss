@@ -1,3 +1,5 @@
+@use 'mixins' as *;
+
 .hero {
     font-family: Roboto, sans-serif;
     padding-top: 120px;
@@ -9,22 +11,32 @@
     }
 
     &__title {
+        margin-top: 20px;
         color: #f9f9f9;
         font-weight: 500;
         letter-spacing: 1px;
         margin-bottom: 16px;
     }
 
-    &::before {
-        content: "";
+    &__background {
         background: linear-gradient(transparent, transparent, #00050d), url("../../src/images/hero-background-image.jpg") no-repeat center;
-        background-size: cover;
+        background-size: 100vw;
         position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
         opacity: 0.75;
+
+        @media (max-width: 768px) {
+            width: 100vw;
+            height: 211px;
+            opacity: 0.55;
+        }
+    }
+
+    &__button {
+        @include button;
     }
 
     &__buttons-group {
@@ -32,10 +44,19 @@
         display: flex;
         max-width: 350px;
         justify-content: space-between;
+
+        @media (max-width: 768px) {
+            display: block;
+        }
     }
 
     &__branding-image {
         max-width: 341px;
+
+        @media (max-width: 768px) {
+            padding-top: 40px;
+            width: 35vw;
+        }
     }
 
     &__text {
@@ -51,10 +72,12 @@
         font-weight: 700;
 
         &-group {
-            display: flex;
-            max-width: 240px;     
-            justify-content: space-between;
+            max-width: 240px;
             margin-bottom: 8px;
+
+            &:first-child {
+                display: flex;
+            }
 
             &:last-child {
                 max-width: 350px;
@@ -64,6 +87,8 @@
         &-info {
             height: 20px;
             border-radius: 4px;
+            display: inline-block;
+            margin: 0 5px 6px 4px;
         }
         
         &:nth-child(2) {

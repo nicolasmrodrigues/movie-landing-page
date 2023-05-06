@@ -18,6 +18,10 @@
         padding-bottom: 5px;
         border-bottom: 5px solid transparent;
 
+        @media (max-width: 768px) {
+            margin: 0 3vw;
+        }
+
         &--is-active {
             border-color: #f9f9f9;
         }
@@ -28,6 +32,10 @@
 .tabs {
     padding-top: 150px;
     font-family: Roboto, sans-serif;
+
+    @media (max-width: 768px) {
+        padding-top: 110px;
+    }
 }
 
 [data-tab-id="related"] {
@@ -39,6 +47,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 24px;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr 1fr;
+            }
     
             &__movie, &__movie-image {
                 max-width: 100%;
