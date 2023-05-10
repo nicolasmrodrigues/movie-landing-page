@@ -34,8 +34,9 @@ function minificaJS() {
 }
 
 exports.dev = function () {
-    gulp.watch('./source/styles/*.scss', gulp.parallel(compilaSass))
-    gulp.watch('source/scripts/*js', gulp.parallel(minificaJS))
+    gulp.watch('./source/sass/*.scss', gulp.parallel(compilaSass))
+    gulp.watch('./source/javascript/*js', gulp.parallel(minificaJS))
+    gulp.watch('./source/*.html', gulp.parallel(minificaHTML))
 }
 
 exports.build = gulp.series(compilaSass, comprimeImagens, minificaHTML, minificaJS);
