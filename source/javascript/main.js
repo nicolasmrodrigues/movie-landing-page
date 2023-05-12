@@ -3,26 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const langOptions = document.getElementsByClassName('lang-option');
 
     changesHeaderSize();
-
-    function changesHeaderSize() {
-        const header = document.getElementsByClassName('header')[0];
-        const brading = document.getElementsByClassName('header-branding')[0];
-        const langMenu = document.getElementById('lang-submenu');
-        const genresMenu = document.getElementById('genre-submenu');
-
-        if (scrollY > 150) {
-            header.style.height = '50px';
-            brading.style.height = '35px';
-            langMenu.style.transform = 'translate(-55px, 66px)';
-            genresMenu.style.transform = 'translate(-25px, 121px)';
-            
-        } else {
-            header.style.height = '70px';
-            brading.style.height = '45px';
-            langMenu.style.transform = 'translate(-55px, 75px)';
-            genresMenu.style.transform = 'translate(-25px, 132px)';
-        }
-    }
+    defineLangAbbr();
 
     window.onscroll = function() {
         changesHeaderSize();
@@ -38,8 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
-    defineLangAbbr();
-
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function(button) {
             const tabName = button.target.dataset.tabButton;
@@ -51,6 +30,26 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 })
+
+function changesHeaderSize() {
+    const header = document.getElementsByClassName('header')[0];
+    const brading = document.getElementsByClassName('header-branding')[0];
+    const langMenu = document.getElementById('lang-submenu');
+    const genresMenu = document.getElementById('genre-submenu');
+
+    if (scrollY > 150) {
+        header.style.height = '50px';
+        brading.style.height = '35px';
+        langMenu.style.transform = 'translate(-55px, 66px)';
+        genresMenu.style.transform = 'translate(-25px, 121px)';
+        
+    } else {
+        header.style.height = '70px';
+        brading.style.height = '45px';
+        langMenu.style.transform = 'translate(-55px, 75px)';
+        genresMenu.style.transform = 'translate(-25px, 132px)';
+    }
+}
 
 function hideTabs() {
     const tabs = document.querySelectorAll('[data-tab-id]');
