@@ -82,14 +82,27 @@
         &-content, &__movie-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
+
+            @media (max-width: 768px) {
+                display: block;
+            }
         }
 
         &-content {
             gap: 24px;
         }
 
-        &__movie-details-cast {
-            margin-left: 16px;
+        &__movie-details {
+            &-cast {
+                @media (min-width: 768px) {
+                    margin-left: 16px;
+                }
+            }
+            &-overview {
+                @media (max-width: 768px) {
+                    margin-top: 24px;
+                }
+            }
         }
 
         &__info {
