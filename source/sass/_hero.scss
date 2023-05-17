@@ -19,6 +19,7 @@
     }
 
     &__background {
+        height: 40vh;
         background: linear-gradient(transparent, transparent, #00050d), url("../images/hero-background-image.jpg") no-repeat center;
         background-size: 100vw;
         position: absolute;
@@ -29,8 +30,7 @@
         opacity: 0.75;
 
         @media (max-width: 768px) {
-            width: 100vw;
-            height: 211px;
+            height: 50vw;
             opacity: 0.75;
         }
     }

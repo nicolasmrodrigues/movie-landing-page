@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     changesHeaderSize();
     defineLangAbbr();
-
+    
     window.onscroll = function() {
         changesHeaderSize();
     }
@@ -33,21 +33,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function changesHeaderSize() {
     const header = document.getElementsByClassName('header')[0];
-    const brading = document.getElementsByClassName('header-branding')[0];
+    const brading = document.getElementsByClassName('branding')[0];
     const langMenu = document.getElementById('lang-submenu');
     const genresMenu = document.getElementById('genre-submenu');
+    const nav = document.getElementsByClassName('navegation__list')[0];
+    const navItens = document.getElementsByClassName('navegation__item');
+    const navArrow = document.getElementsByClassName('navegation__arrow')[0];
+    const searchInput = document.getElementsByClassName('account-and-search__input')[0];
+    console.log(navItens)
 
     if (scrollY > 150) {
-        header.style.height = '50px';
+        header.style.height = '55px';
         brading.style.height = '35px';
-        langMenu.style.transform = 'translate(-55px, 66px)';
-        genresMenu.style.transform = 'translate(-25px, 121px)';
+        langMenu.style.transform = 'translate(-55px, 37px)';
+        genresMenu.style.transform = 'translate(-25px, 37px)';
+        nav.style.marginLeft = '30px';
+        navArrow.style.marginLeft = '5px';
+        searchInput.style.padding = '7px 10px'
+
+        for (let i = 0; i < navItens.length; i++) {
+            navItens[i].style.margin = '0 9px';
+        }
         
     } else {
         header.style.height = '70px';
         brading.style.height = '45px';
-        langMenu.style.transform = 'translate(-55px, 75px)';
-        genresMenu.style.transform = 'translate(-25px, 132px)';
+        langMenu.style.transform = 'translate(-55px, 45px)';
+        genresMenu.style.transform = 'translate(-25px, 45px)';
+        nav.style.marginLeft  = '40px';
+        navArrow.style.marginLeft = '6px';
+        searchInput.style.padding = '9px 10px'
+
+        for (let i = 0; i < navItens.length; i++) {
+            navItens[i].style.margin = '0 12px';
+        }
     }
 }
 
