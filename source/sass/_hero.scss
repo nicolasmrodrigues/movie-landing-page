@@ -55,14 +55,14 @@
 
     &__branding {
         &, & > * {
-            margin-top: -20px;
+            margin-top: -32px;
         }
 
         &-image {
-            max-width: 341px;
-            
+            width: 25vw;
+
             @media (max-width: 768px) {
-                width: 35vw;
+                width: 50vw;
             }
         }
 
