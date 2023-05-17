@@ -1,6 +1,11 @@
 @mixin tab-config {
     display: none;
     margin-top: 80px;
+
+    @media (max-width: 768px) {
+        margin-top: 50px;
+    }
+
     &-name {
         color: #f9f9f9;
         margin-bottom: 12px;
