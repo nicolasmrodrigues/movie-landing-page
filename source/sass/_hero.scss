@@ -50,13 +50,19 @@
         }
     }
 
-    &__branding-image {
-        max-width: 341px;
-
-        @media (max-width: 768px) {
-            padding-top: 40px;
-            width: 35vw;
+    &__branding {
+        &, & > * {
+            margin-top: -20px;
         }
+
+        &-image {
+            max-width: 341px;
+            
+            @media (max-width: 768px) {
+                width: 35vw;
+            }
+        }
+
     }
 
     &__text {
