@@ -59,8 +59,8 @@ function changesHeaderSize() {
     } else {
         header.style.height = '';
         brading.style.height = '';
-        langMenu.style.transform = 'translate(-55px, 45px)';
-        genresMenu.style.transform = 'translate(-25px, 45px)';
+        langMenu.style.transform = 'translate(-55px, 76px)';
+        genresMenu.style.transform = 'translate(-25px, 132px)';
         nav.style.marginLeft  = '';
         navArrow.style.marginLeft = '';
         searchInput.style.padding = ''

@@ -30,6 +30,60 @@
 
 }
 
+.gallery {
+    margin-top: 60px;
+
+    @media (max-width: 768px) {
+        margin-top: 40px;
+    }
+
+    &-cell {
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 23.55%;
+        height: 220px;
+        margin-right: 16px;
+        counter-increment: gallery-cell;
+
+        &::before {
+            display: block;
+            content: counter(gallery-cell);
+            line-height: 180px;
+            font-size: 0;
+
+            @media (max-width: 768px) {
+                width: 240px;
+                height: 145px
+            }
+        }
+
+        @media (max-width: 768px) {
+            width: 240px;
+            height: 180px;
+        }
+    }
+}
+
+.flickity-prev-next-button {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.watch-this-show {
+    display: inline-block;
+    margin-top: 8px;
+    cursor: pointer;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: #f9f9f9;
+}
+
+.fa-circle-play {
+    margin-right: 8px;
+    margin-left: 4px;
+}
+
 .tabs {
     padding-top: 150px;
     font-family: Roboto, sans-serif;
@@ -39,43 +93,12 @@
     }
 }
 
-[data-tab-id="related"] {
-    .tab {
-        @include tab-config();
-    
-        &-content {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 24px;
-
-            @media (max-width: 768px) {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-    
-            &__movie, &__movie-image {
-                max-width: 100%;
-                max-height: 100%;
-            }
-    
-            &__movie-image {
-                border-radius: 4px;
-            }
-    
-            &__movie-link {
-                display: block;
-                font-size: 0;
-            }
-        }
-    }
+.tab {
+    @include tab-config();
 }
-
 
 [data-tab-id="details"] {
     .tab {
-        @include tab-config();
-
         font-size: 18px;
         line-height: 28px;
         color: #f9f9f9;

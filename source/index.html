@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css">
     <link rel="stylesheet" href="./css/main.css">
     <title>Vingadores Ultimato</title>
 </head>
@@ -109,49 +110,56 @@
             <div class="tab tab--show">
                 <h2 class="tab-name">Outros usuários também assistiram</h2>
                 <hr>
-                <br>
-                <ul class="tab-content">
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie1.webp" alt="Filme 1">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie2.webp" alt="Filme 2">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie3.webp" alt="Filme 3">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie4.webp" alt="Filme 4">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie5.webp" alt="Filme 5">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie6.webp" alt="Filme 6">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie7.webp" alt="Filme 7">
-                        </a>
-                    </li>
-                    <li class="tab-content__movie">
-                        <a class="tab-content__movie-link" href="">
-                            <img class="tab-content__movie-image" src="./images/other-movies/movie8.webp" alt="Filme 8">
-                        </a>
-                    </li>
-                </ul>
+                <div style="position: relative;" class="gallery js-flickity" data-flickity-options='{ "wrapAround": true, "pageDots": false }'>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie1.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie2.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie3.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie4.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie5.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie6.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie7.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                    <div class="gallery-cell" style="background-image: url('./images/other-movies/movie8.webp');">
+                        <span class="watch-this-show">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Assista Agora
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <div data-tab-id="details" class="tab-container">
@@ -230,5 +238,6 @@
     
     <script src="./javascript/main.js"></script>
     <script src="https://kit.fontawesome.com/7ced5a16e0.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
 </body>
 </html>

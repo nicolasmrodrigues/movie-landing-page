@@ -34,6 +34,7 @@
         letter-spacing: 1px;
         font-weight: bold;
         transition: margin .3s ease;
+        align-items: center;
 
         &:hover {
             .navegation__arrow {
@@ -95,6 +96,10 @@
     min-width: 60px;
 }
 
+.navegation-container, .navegation-container > * {
+    height: 100%;
+}
+
 .header {
     padding: 0px 48px;
     text-align: center;
@@ -102,7 +107,6 @@
     &, & > * {
         display: flex;
         align-items: center;
-
     }
 
     background-color: #00050d;
@@ -128,6 +132,10 @@
         margin-right: 24px;
     }
 
+    &, &__form {
+        align-items: center;
+    }
+
     &__input {
         transition: padding .3s ease;
         background-color: #33373d;
@@ -146,9 +154,9 @@
 }
 
 #lang-submenu {
-    transform: translate(-55px, 37px);
+    transform: translate(-55px, 68px);
 }
 
 #genre-submenu {
-    transform: translate(-25px, 37px);
+    transform: translate(-25px, 124px);
 }
