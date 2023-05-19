@@ -9,6 +9,15 @@
     box-sizing: border-box;
 }
 
+.background {
+    transition: background-color .3s ease;
+    z-index: -1;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 5, 13, .1);
+}
+
 ul {
     list-style: none;
 }

@@ -1,10 +1,9 @@
 @use 'mixins' as *;
 
 .hero {
-    font-family: Roboto, sans-serif;
     padding-top: 120px;
+    font-family: Roboto, sans-serif;
     user-select: none;
-    height: 100vh;
 
     * {
         position: relative;
@@ -19,23 +18,36 @@
     }
 
     &__background {
-        background: linear-gradient(transparent, transparent, #00050d), url("../images/hero-background-image.jpg") no-repeat center;
-        background-size: 100vw;
-        position: absolute;
-        top: 0;
-        left: 0;
+        transition: all .5s ease;
+
+        *, &-container {
+            z-index: -2;
+        }
+        
+        &-container {
+            position: fixed;
+            top: -20px;
+            left: 0;
+            aspect-ratio: 16/9;
+            width: 100vw;
+            height: auto;
+        }
+
+        max-width: 100vw;
+        position: fixed;
+        top: -20px;
         bottom: 0;
-        right: 0;
         opacity: 0.75;
 
         @media (max-width: 768px) {
-            height: 50vw;
-            opacity: 0.75;
+            top: -30px;
         }
-        
-        @media (max-width: 768px) and (min-width: 1024px) {
-            height: 40vh;
-        }
+    }
+
+    &__fade {
+        background: linear-gradient(0deg,#00050d,rgba(0,5,13,0) 33.42%);
+        height: calc(100% + 1px);
+        left: 0;
     }
 
     &__button {

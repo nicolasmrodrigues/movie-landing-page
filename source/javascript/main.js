@@ -40,29 +40,31 @@ function changesHeaderSize() {
     const navItens = document.getElementsByClassName('navegation__item');
     const navArrow = document.getElementsByClassName('navegation__arrow')[0];
     const searchInput = document.getElementsByClassName('account-and-search__input')[0];
-    console.log(navItens)
+    const background = document.getElementsByClassName('background')[0];
 
     if (scrollY > 150) {
         header.style.height = '55px';
         brading.style.height = '35px';
-        langMenu.style.transform = 'translate(-55px, 37px)';
-        genresMenu.style.transform = 'translate(-25px, 37px)';
         nav.style.marginLeft = '30px';
+        langMenu.style.transform = '';
+        genresMenu.style.transform = '';
         navArrow.style.marginLeft = '5px';
         searchInput.style.padding = '7px 10px'
+        background.style.backgroundColor = 'rgba(0, 5, 13, .8)'
 
         for (let i = 0; i < navItens.length; i++) {
             navItens[i].style.margin = '0 9px';
         }
         
     } else {
-        header.style.height = '70px';
-        brading.style.height = '45px';
+        header.style.height = '';
+        brading.style.height = '';
         langMenu.style.transform = 'translate(-55px, 45px)';
         genresMenu.style.transform = 'translate(-25px, 45px)';
-        nav.style.marginLeft  = '40px';
-        navArrow.style.marginLeft = '6px';
-        searchInput.style.padding = '9px 10px'
+        nav.style.marginLeft  = '';
+        navArrow.style.marginLeft = '';
+        searchInput.style.padding = ''
+        background.style.backgroundColor = ''
 
         for (let i = 0; i < navItens.length; i++) {
             navItens[i].style.margin = '0 12px';
