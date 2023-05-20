@@ -77,11 +77,16 @@
     font-family: Roboto, sans-serif;
     font-weight: 500;
     color: #f9f9f9;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .fa-circle-play {
-    margin-right: 8px;
-    margin-left: 4px;
+    margin-right: 6px;
+    margin-left: 8px;
 }
 
 .tabs {
