@@ -47,11 +47,11 @@ function changesHeaderSize() {
         const galleryChildren = gallery.children
         if (lang == 'English') {
             for (let i = 0; i < galleryChildren.length; i++) {
-                galleryChildren[i].style.backgroundImage = `url('../build/images/other-movies/en/movie${i+1}.webp')`;
+                galleryChildren[i].style.backgroundImage = `url('./images/other-movies/en/movie${i+1}.webp')`;
             }
         } else {
             for (let i = 0; i < galleryChildren.length; i++) {
-                galleryChildren[i].style.backgroundImage = `url('../build/images/other-movies/pt/movie${i+1}.webp')`;
+                galleryChildren[i].style.backgroundImage = `url('./images/other-movies/pt/movie${i+1}.webp')`;
             }
         }
     
