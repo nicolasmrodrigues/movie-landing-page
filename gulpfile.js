@@ -1,6 +1,8 @@
 'use strict';
 
 const gulp = require('gulp');
+const util = require('gulp-util');
+const jsonMinify = require('gulp-json-minify')
 const sass = require('gulp-sass')(require('sass'));
 const imagemin = require('gulp-imagemin');
 const sourcemaps = require('gulp-sourcemaps');
@@ -12,13 +14,13 @@ function compilaSass() {
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: "compressed"}))
     .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('build/css'));
+    .pipe(gulp.dest('build/css/'));
 };
 
 function comprimeImagens() {
     return gulp.src('source/images/**/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('build/images'));
+    .pipe(gulp.dest('build/images/'));
 };
 
 function minificaHTML() {
@@ -28,15 +30,23 @@ function minificaHTML() {
 }
 
 function minificaJS() {
-    return gulp.src('source/javascript/main.js')
+    return gulp.src('source/javascript/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('build/javascript/'));
 }
 
+function minificaJson() {
+    return gulp.src('source/data/*.json')
+        .pipe(jsonMinify())
+        .pipe(gulp.dest('build/data/'))
+        .on('error', util.log);
+}
+
 exports.dev = function () {
     gulp.watch('./source/sass/*.scss', gulp.parallel(compilaSass))
-    gulp.watch('./source/javascript/*js', gulp.parallel(minificaJS))
+    gulp.watch('./source/javascript/*.js', gulp.parallel(minificaJS))
+    gulp.watch('./source/data/*.json', gulp.parallel(minificaJson))
     gulp.watch('./source/*.html', gulp.parallel(minificaHTML))
 }
 
-exports.build = gulp.series(compilaSass, comprimeImagens, minificaHTML, minificaJS);
+exports.build = gulp.series(compilaSass, comprimeImagens, minificaHTML, minificaJS, minificaJson);

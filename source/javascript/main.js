@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     changesHeaderSize();
     defineLangAbbr();
+    translate();
     
     window.onscroll = function() {
         changesHeaderSize();
@@ -110,5 +111,51 @@ function defineLangAbbr() {
         langText.innerHTML = 'PT';
     } else {
         langText.innerHTML = 'EN';
+    }
+}
+
+async function translate() {
+    const requestURL = "./data/langData.json";
+    const request = new Request(requestURL);
+    
+    const response = await fetch(request);
+    const languages = await response.json();
+    
+    let langDataEn = languages.languages.en.strings
+    let langDataPt = languages.languages.pt.strings
+    let langOptions = document.getElementsByClassName('lang-option');
+    let langElems = document.querySelectorAll('[lang]')
+
+    for (let i = 0; i < langOptions.length; i++) {
+        langOptions[i].addEventListener('click', function() {
+            if (langOptions[i].innerHTML == 'English') {
+                for (let i = 0; i < langElems.length; i++) {
+                    langElems[i].lang = 'en'
+                    if (i > 0) {
+                        if (langElems[i].placeholder !== undefined) {
+                            langElems[i].placeholder = Object.values(langDataEn)[i-1]
+                        } else if (langElems[i].alt !== undefined) {
+                            langElems[i].alt = Object.values(langDataEn)[i-1]
+                        } else {
+                            langElems[i].textContent = Object.values(langDataEn)[i-1]
+                        }
+                    }
+                }
+            }
+            if (langOptions[i].innerHTML == 'Português') {
+                for (let i = 0; i < langElems.length; i++) {
+                    langElems[i].lang = 'pt-BR'
+                    if (i > 0) {
+                        if (langElems[i].placeholder !== undefined) {
+                            langElems[i].placeholder = Object.values(langDataPt)[i-1]
+                        } else if (langElems[i].alt !== undefined) {
+                            langElems[i].alt = Object.values(langDataPt)[i-1]
+                        } else {
+                            langElems[i].textContent = Object.values(langDataPt)[i-1]
+                        }
+                    }
+                }
+            }
+        })
     }
 }

@@ -12,15 +12,11 @@
 
     &__logo {
         display: block;
-        margin: 0 auto;
+        margin: 0 auto 8px auto;
+        cursor: pointer;
+        height: 50px;
+        min-width: 60px;
         background-image: url('../images/logo.png');
-
-        &:lang(en) {
-            background-image: url('../images/logo-eng.png');
-        }
-        aspect-ratio: 16/9;
-        background-size: contain;
-        width: 130px;
     }
 
     &__link-list {
