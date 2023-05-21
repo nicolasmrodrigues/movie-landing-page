@@ -1,4 +1,5 @@
 .footer {
+
     margin-top: 180px;
 
     @media (max-width: 768px) {
@@ -12,8 +13,14 @@
     &__logo {
         display: block;
         margin: 0 auto;
-        max-width: 130px;
-        max-height: 130px;
+        background-image: url('../images/logo.png');
+
+        &:lang(en) {
+            background-image: url('../images/logo-eng.png');
+        }
+        aspect-ratio: 16/9;
+        background-size: contain;
+        width: 130px;
     }
 
     &__link-list {
@@ -45,7 +52,7 @@
 
     }
 
-    &__text {
+    &__text, .copyright-symbol {
         margin-top: 8px;
         color: #7b8faf;
 

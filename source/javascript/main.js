@@ -41,7 +41,22 @@ function changesHeaderSize() {
     const navArrow = document.getElementsByClassName('navegation__arrow')[0];
     const searchInput = document.getElementsByClassName('account-and-search__input')[0];
     const background = document.getElementsByClassName('background')[0];
-
+    const gallery = document.querySelector('.flickity-slider');
+    lang = document.getElementsByClassName('selected')[0].innerHTML;
+    if (gallery !== null) {
+        const galleryChildren = gallery.children
+        if (lang == 'English') {
+            for (let i = 0; i < galleryChildren.length; i++) {
+                galleryChildren[i].style.backgroundImage = `url('../build/images/other-movies/en/movie${i+1}.webp')`;
+            }
+        } else {
+            for (let i = 0; i < galleryChildren.length; i++) {
+                galleryChildren[i].style.backgroundImage = `url('../build/images/other-movies/pt/movie${i+1}.webp')`;
+            }
+        }
+    
+    }    
+    
     if (scrollY > 150) {
         header.style.height = '55px';
         brading.style.height = '35px';

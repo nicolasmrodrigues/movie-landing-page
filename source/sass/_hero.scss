@@ -1,7 +1,7 @@
 @use 'mixins' as *;
 
 .hero {
-    padding-top: 120px;
+    padding-top: 100px;
     font-family: Roboto, sans-serif;
     user-select: none;
 
@@ -10,11 +10,10 @@
     }
 
     &__title {
-        margin-top: 20px;
         color: #f9f9f9;
         font-weight: 500;
-        letter-spacing: 1px;
-        margin-bottom: 16px;
+        letter-spacing: 2px;
+        margin: 16px 0;
     }
 
     &__background {
@@ -52,12 +51,27 @@
 
     &__button {
         @include button;
+
+        &:first-child {
+            max-width: 150px;
+            max-height: 50px;
+            width: 100%;
+            height: 100%;
+        }
+
+        &:last-child {
+            max-width: 190px;
+            max-height: 50px;
+            width: 100%;
+            height: 100%;
+        }
     }
 
     &__buttons-group {
         margin-top: 24px;
         display: flex;
         max-width: 350px;
+        height: 50px;
         justify-content: space-between;
 
         @media (max-width: 768px) {
@@ -71,7 +85,14 @@
         }
 
         &-image {
+            background-image: url('../images/logo.png');
+            aspect-ratio: 16/9;
+            background-size: contain;
             width: 25vw;
+
+            &:lang(en) {
+                background-image: url('../images/logo-eng.png');
+            }
 
             @media (max-width: 768px) {
                 width: 50vw;
