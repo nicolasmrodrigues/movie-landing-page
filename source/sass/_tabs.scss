@@ -41,7 +41,6 @@
         background-repeat: no-repeat;
         background-size: contain;
         width: 23.55%;
-        height: 350px;
         margin-right: 16px;
         counter-increment: gallery-cell;
 
@@ -59,26 +58,25 @@
 
         @media (max-width: 1024px) {
             width: 240px;
-            height: 180px;
         }
     }
 }
 
 .flickity-prev-next-button {
-    @media (max-width: 767px) {
-        display: none;
+    background: #151414;
+
+    &:hover {
+        background: lighten(#151414, 5%);
     }
-    @media (min-width: 768px) and (max-width: 1024px) {
-        top: 45%;
-    }
-    @media (min-width: 1024px) and (max-width: 1279px) {
-        top: 41%;
+
+    .arrow {
+        fill: #f9f9f9;
     }
 }
 
 .watch-this-show {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 6px;
     cursor: pointer;
     font-family: Roboto, sans-serif;
     font-weight: 500;
