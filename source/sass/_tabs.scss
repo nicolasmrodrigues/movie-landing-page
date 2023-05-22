@@ -41,23 +41,23 @@
         background-repeat: no-repeat;
         background-size: contain;
         width: 23.55%;
-        height: 220px;
+        height: 350px;
         margin-right: 16px;
         counter-increment: gallery-cell;
 
         &::before {
             display: block;
             content: counter(gallery-cell);
-            line-height: 180px;
+            aspect-ratio: 16/9;
             font-size: 0;
 
             @media (max-width: 768px) {
                 width: 240px;
-                height: 145px
+                height: 145px;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             width: 240px;
             height: 180px;
         }
@@ -65,8 +65,14 @@
 }
 
 .flickity-prev-next-button {
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         display: none;
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        top: 45%;
+    }
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        top: 41%;
     }
 }
 
@@ -78,6 +84,10 @@
     font-weight: 500;
     color: #f9f9f9;
     transition: all .3s ease-in-out;
+
+    @media (max-width: 768px) {
+        margin-top: 0;
+    }
 
     &:hover {
         transform: scale(1.1);
@@ -112,7 +122,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
 
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 display: block;
             }
         }
@@ -123,12 +133,12 @@
 
         &__movie-details {
             &-cast {
-                @media (min-width: 768px) {
+                @media (min-width: 767px) {
                     margin-left: 16px;
                 }
             }
             &-overview {
-                @media (max-width: 768px) {
+                @media (max-width: 767px) {
                     margin-top: 24px;
                 }
             }
