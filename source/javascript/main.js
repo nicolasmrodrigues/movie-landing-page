@@ -2,19 +2,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('[data-tab-button]');
     langOptions = document.getElementsByClassName('lang-option');
     browserLanguage = window.navigator.language.slice(0, 2);
-    languagePreference = sessionStorage.languagePreference
-    previusLanguage = sessionStorage.previusLanguage
+    chosenLanguage = '';
+
+    if (browserLanguage === 'pt' && !window.location.hash) {
+        window.location.hash = '#pt-br';
+    } else if (browserLanguage === 'en' && !window.location.hash){
+        window.location.hash = '#en';
+    }
     
     changesHeaderSize();
     translate();
-    defineLangAbbr();
 
-    window.scrollBy(0, 1);
+    window.scrollBy(0, 1)
 
     window.onscroll = function() {
         changesHeaderSize();
         placesMoviesCovers();
     }
+
+    $("body").fadeIn("slow");
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function(button) {
@@ -87,9 +93,9 @@ function removeActiveButton() {
 
 function defineLangAbbr() {
     const langText = document.getElementsByClassName('lang-abbr')[0];
-    lang = document.getElementsByClassName('selected')[0].innerHTML;
+    let currentLanguage = document.documentElement.lang
     
-    if (lang == 'Português') {
+    if (currentLanguage == 'pt-BR') {
         langText.innerHTML = 'PT';
     } else {
         langText.innerHTML = 'EN';
@@ -104,64 +110,62 @@ async function translate() {
     languages = await response.json();
 
     let langElems = document.querySelectorAll('[lang]')
-    
-    if (!languagePreference) {
-        if (browserLanguage != 'pt') {
-            changesSelectedLanguage('en')
-    
-            for (let i = 0; i < langElems.length; i++) {
-                langElems[i].lang = 'en'
-                if (i > 0) {
-                    translatesContent('en', i);
-                }
-            }
-        } else {
-            changesSelectedLanguage('pt');
-        }
-    } else {
-        if (previusLanguage == 'English') {
-            changesSelectedLanguage('en')
-            for (let i = 0; i < langElems.length; i++) {
-                langElems[i].lang = 'en'
-                if (i > 0) {
-                    translatesContent('en', i);
-                }
-            }
-        }
-    }
+    dataReaload = document.querySelectorAll('[data-reload]')
 
     for (let i = 0; i < langOptions.length; i++) {
+
+        if (window.location.hash === '#en') {
+            for (let i = 0; i < langElems.length; i++) {
+                langElems[i].lang = 'en'
+                if (i > 0) {
+                    translatesContent('en', i)
+                }
+            }
+        } else if (window.location.hash === '#pt-br') {
+            for (let i = 0; i < langElems.length; i++) {
+                langElems[i].lang = 'pt-BR'
+                if (i > 0) {
+                    translatesContent('pt', i)
+                }
+            }
+        }
+
         langOptions[i].addEventListener('click', function() {
-            if (langOptions[i].innerHTML == 'English') {
+            chosenLanguage =  langOptions[i].innerHTML
+            
+            if (chosenLanguage === 'English') {
                 for (let i = 0; i < langElems.length; i++) {
                     langElems[i].lang = 'en'
                     if (i > 0) {
-                        translatesContent('en', i);
+                        translatesContent('en', i)
                     }
                 }
-            }
-            if (langOptions[i].innerHTML == 'Português') {
+            } else if (chosenLanguage === 'Português') {
                 for (let i = 0; i < langElems.length; i++) {
                     langElems[i].lang = 'pt-BR'
                     if (i > 0) {
-                        translatesContent('pt', i);
+                        translatesContent('pt', i)
                     }
                 }
             }
-            languagePreference = true
-            window.onbeforeunload = function(e) {
-                let previusLanguage = document.getElementsByClassName('selected')[0].innerHTML;
-                sessionStorage.setItem('previusLanguage', previusLanguage)
-                sessionStorage.setItem('languagePreference', true)
-            }
         })
+        defineLangAbbr();
     }
+    window.addEventListener('hashchange', function() {
+        if (chosenLanguage == '') {
+            this.window.location.reload(true)
+        } else {
+            defineLangAbbr();
+        }
+        chosenLanguage = '';
+    })
 }
 
 function placesMoviesCovers() {
     const gallery = document.querySelector('.flickity-slider');
     const galleryChildren = gallery.children
-    if (lang == 'English') {
+    let currentLanguage = document.documentElement.lang
+    if (currentLanguage == 'en') {
         for (let i = 0; i < galleryChildren.length; i++) {
             galleryChildren[i].style.backgroundImage = `url('./images/other-movies/en/movie${i+1}.webp')`;
         }
@@ -172,24 +176,6 @@ function placesMoviesCovers() {
     }
 }
 
-function changesSelectedLanguage(lang) {
-    if (lang === undefined) {
-        for (let x = 0; x < langOptions.length; x++) {
-            langOptions[x].addEventListener('click', function() {
-                document.getElementsByClassName('selected')[0].classList.remove('selected')
-                langOptions[x].classList.add('selected');
-            })
-        }
-    } else if (lang == 'en') {
-        langOptions[0].classList.remove('selected');
-        langOptions[1].classList.add('selected');
-    } else if (lang == 'pt') {
-        langOptions[0].classList.add('selected');
-        langOptions[1].classList.remove('selected');
-    }
-    defineLangAbbr();
-}
-
 function translatesContent(lang, langElemIndex) {
     let langElems = document.querySelectorAll('[lang]')
 
@@ -197,8 +183,6 @@ function translatesContent(lang, langElemIndex) {
     let langDataPt = languages.languages.pt.strings
 
     if (lang == 'en') {
-        changesSelectedLanguage('en');
-
         if (langElems[langElemIndex].placeholder !== undefined) {
             langElems[langElemIndex].placeholder = Object.values(langDataEn)[langElemIndex-1]
         } else if (langElems[langElemIndex].alt !== undefined) {
@@ -207,8 +191,6 @@ function translatesContent(lang, langElemIndex) {
             langElems[langElemIndex].textContent = Object.values(langDataEn)[langElemIndex-1]
         }
     } else if (lang == 'pt') {
-        changesSelectedLanguage('pt');
-
         if (langElems[langElemIndex].placeholder !== undefined) {
             langElems[langElemIndex].placeholder = Object.values(langDataPt)[langElemIndex-1]
         } else if (langElems[langElemIndex].alt !== undefined) {

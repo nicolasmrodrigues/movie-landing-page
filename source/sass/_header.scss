@@ -65,6 +65,9 @@
         transition: transform .3s ease;
 
         &-item {
+            display: block;
+            text-decoration: none;
+            color: #f9f9f9;
             margin: 6px 16px;
             padding: 6px 0px 6px 8px;
             border-radius: 4px;

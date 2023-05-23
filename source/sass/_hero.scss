@@ -84,10 +84,13 @@
         }
 
         &-image {
-            background-image: url('../images/logo.webp');
             aspect-ratio: 16/9;
             background-size: contain;
             width: 25vw;
+
+            &:lang(pt) {
+                background-image: url('../images/logo.webp');
+            }
 
             &:lang(en) {
                 background-image: url('../images/logo-en.webp');
