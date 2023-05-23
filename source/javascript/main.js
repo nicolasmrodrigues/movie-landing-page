@@ -1,23 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {    
     const buttons = document.querySelectorAll('[data-tab-button]');
-    const langOptions = document.getElementsByClassName('lang-option');
-
-    changesHeaderSize();
-    defineLangAbbr();
-    translate();
+    langOptions = document.getElementsByClassName('lang-option');
+    browserLanguage = window.navigator.language.slice(0, 2);
+    languagePreference = sessionStorage.languagePreference
+    previusLanguage = sessionStorage.previusLanguage
     
+    changesHeaderSize();
+    translate();
+    defineLangAbbr();
+
+    window.scrollBy(0, 1);
+
     window.onscroll = function() {
         changesHeaderSize();
-    }
-    
-    for (let x = 0; x < langOptions.length; x++) {
-        langOptions[x].addEventListener('click', function() {
-            for (let y = 0; y < langOptions.length; y++) {
-                langOptions[y].classList.remove('selected');
-            }
-            langOptions[x].classList.add('selected');
-            defineLangAbbr();
-        })
+        placesMoviesCovers();
     }
 
     for (let i = 0; i < buttons.length; i++) {
@@ -42,21 +38,6 @@ function changesHeaderSize() {
     const navArrow = document.getElementsByClassName('navegation__arrow')[0];
     const searchInput = document.getElementsByClassName('account-and-search__input')[0];
     const background = document.getElementsByClassName('background')[0];
-    const gallery = document.querySelector('.flickity-slider');
-    lang = document.getElementsByClassName('selected')[0].innerHTML;
-    if (gallery !== null) {
-        const galleryChildren = gallery.children
-        if (lang == 'English') {
-            for (let i = 0; i < galleryChildren.length; i++) {
-                galleryChildren[i].style.backgroundImage = `url('./images/other-movies/en/movie${i+1}.webp')`;
-            }
-        } else {
-            for (let i = 0; i < galleryChildren.length; i++) {
-                galleryChildren[i].style.backgroundImage = `url('./images/other-movies/pt/movie${i+1}.webp')`;
-            }
-        }
-    
-    }    
     
     if (scrollY > 150) {
         header.style.height = '55px';
@@ -107,6 +88,7 @@ function removeActiveButton() {
 function defineLangAbbr() {
     const langText = document.getElementsByClassName('lang-abbr')[0];
     lang = document.getElementsByClassName('selected')[0].innerHTML;
+    
     if (lang == 'Português') {
         langText.innerHTML = 'PT';
     } else {
@@ -119,12 +101,34 @@ async function translate() {
     const request = new Request(requestURL);
     
     const response = await fetch(request);
-    const languages = await response.json();
-    
-    let langDataEn = languages.languages.en.strings
-    let langDataPt = languages.languages.pt.strings
-    let langOptions = document.getElementsByClassName('lang-option');
+    languages = await response.json();
+
     let langElems = document.querySelectorAll('[lang]')
+    
+    if (!languagePreference) {
+        if (browserLanguage != 'pt') {
+            changesSelectedLanguage('en')
+    
+            for (let i = 0; i < langElems.length; i++) {
+                langElems[i].lang = 'en'
+                if (i > 0) {
+                    translatesContent('en', i);
+                }
+            }
+        } else {
+            changesSelectedLanguage('pt');
+        }
+    } else {
+        if (previusLanguage == 'English') {
+            changesSelectedLanguage('en')
+            for (let i = 0; i < langElems.length; i++) {
+                langElems[i].lang = 'en'
+                if (i > 0) {
+                    translatesContent('en', i);
+                }
+            }
+        }
+    }
 
     for (let i = 0; i < langOptions.length; i++) {
         langOptions[i].addEventListener('click', function() {
@@ -132,13 +136,7 @@ async function translate() {
                 for (let i = 0; i < langElems.length; i++) {
                     langElems[i].lang = 'en'
                     if (i > 0) {
-                        if (langElems[i].placeholder !== undefined) {
-                            langElems[i].placeholder = Object.values(langDataEn)[i-1]
-                        } else if (langElems[i].alt !== undefined) {
-                            langElems[i].alt = Object.values(langDataEn)[i-1]
-                        } else {
-                            langElems[i].textContent = Object.values(langDataEn)[i-1]
-                        }
+                        translatesContent('en', i);
                     }
                 }
             }
@@ -146,16 +144,77 @@ async function translate() {
                 for (let i = 0; i < langElems.length; i++) {
                     langElems[i].lang = 'pt-BR'
                     if (i > 0) {
-                        if (langElems[i].placeholder !== undefined) {
-                            langElems[i].placeholder = Object.values(langDataPt)[i-1]
-                        } else if (langElems[i].alt !== undefined) {
-                            langElems[i].alt = Object.values(langDataPt)[i-1]
-                        } else {
-                            langElems[i].textContent = Object.values(langDataPt)[i-1]
-                        }
+                        translatesContent('pt', i);
                     }
                 }
             }
+            languagePreference = true
+            window.onbeforeunload = function(e) {
+                let previusLanguage = document.getElementsByClassName('selected')[0].innerHTML;
+                sessionStorage.setItem('previusLanguage', previusLanguage)
+                sessionStorage.setItem('languagePreference', true)
+            }
         })
+    }
+}
+
+function placesMoviesCovers() {
+    const gallery = document.querySelector('.flickity-slider');
+    const galleryChildren = gallery.children
+    if (lang == 'English') {
+        for (let i = 0; i < galleryChildren.length; i++) {
+            galleryChildren[i].style.backgroundImage = `url('./images/other-movies/en/movie${i+1}.webp')`;
+        }
+    } else {
+        for (let i = 0; i < galleryChildren.length; i++) {
+            galleryChildren[i].style.backgroundImage = `url('./images/other-movies/pt/movie${i+1}.webp')`;
+        }
+    }
+}
+
+function changesSelectedLanguage(lang) {
+    if (lang === undefined) {
+        for (let x = 0; x < langOptions.length; x++) {
+            langOptions[x].addEventListener('click', function() {
+                document.getElementsByClassName('selected')[0].classList.remove('selected')
+                langOptions[x].classList.add('selected');
+            })
+        }
+    } else if (lang == 'en') {
+        langOptions[0].classList.remove('selected');
+        langOptions[1].classList.add('selected');
+    } else if (lang == 'pt') {
+        langOptions[0].classList.add('selected');
+        langOptions[1].classList.remove('selected');
+    }
+    defineLangAbbr();
+}
+
+function translatesContent(lang, langElemIndex) {
+    let langElems = document.querySelectorAll('[lang]')
+
+    let langDataEn = languages.languages.en.strings
+    let langDataPt = languages.languages.pt.strings
+
+    if (lang == 'en') {
+        changesSelectedLanguage('en');
+
+        if (langElems[langElemIndex].placeholder !== undefined) {
+            langElems[langElemIndex].placeholder = Object.values(langDataEn)[langElemIndex-1]
+        } else if (langElems[langElemIndex].alt !== undefined) {
+            langElems[langElemIndex].alt = Object.values(langDataEn)[langElemIndex-1]
+        } else {
+            langElems[langElemIndex].textContent = Object.values(langDataEn)[langElemIndex-1]
+        }
+    } else if (lang == 'pt') {
+        changesSelectedLanguage('pt');
+
+        if (langElems[langElemIndex].placeholder !== undefined) {
+            langElems[langElemIndex].placeholder = Object.values(langDataPt)[langElemIndex-1]
+        } else if (langElems[langElemIndex].alt !== undefined) {
+            langElems[langElemIndex].alt = Object.values(langDataPt)[langElemIndex-1]
+        } else {
+            langElems[langElemIndex].textContent = Object.values(langDataPt)[langElemIndex-1]
+        }
     }
 }

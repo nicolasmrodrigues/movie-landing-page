@@ -31,7 +31,9 @@ function minificaHTML() {
 
 function minificaJS() {
     return gulp.src('source/javascript/*.js')
+    .pipe(sourcemaps.init())
     .pipe(uglify())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('build/javascript/'));
 }
 
