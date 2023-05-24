@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {    
     const buttons = document.querySelectorAll('[data-tab-button]');
-    langOptions = document.getElementsByClassName('lang-option');
+    langOptions = $('.lang-option');
     browserLanguage = window.navigator.language.slice(0, 2);
     chosenLanguage = '';
+    langElems = document.querySelectorAll('[lang]');
 
     if (browserLanguage === 'pt' && !window.location.hash) {
         window.location.hash = '#pt-br';
-    } else if (browserLanguage === 'en' && !window.location.hash){
+    } else if (browserLanguage !== 'pt' && !window.location.hash){
         window.location.hash = '#en';
     }
     
@@ -35,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 function changesHeaderSize() {
-    const header = document.getElementsByClassName('header')[0];
-    const brading = document.getElementsByClassName('branding')[0];
-    const langMenu = document.getElementById('lang-submenu');
-    const genresMenu = document.getElementById('genre-submenu');
-    const nav = document.getElementsByClassName('navegation__list')[0];
-    const navItens = document.getElementsByClassName('navegation__item');
-    const navArrow = document.getElementsByClassName('navegation__arrow')[0];
-    const searchInput = document.getElementsByClassName('account-and-search__input')[0];
-    const background = document.getElementsByClassName('background')[0];
+    const header = $('.header')[0];
+    const brading = $('.branding')[0];
+    const langMenu = $('#lang-submenu')[0];
+    const genresMenu = $('#genre-submenu')[0];
+    const nav = $('.navegation__list')[0];
+    const navItens = $('.navegation__item');
+    const navArrow = $('.navegation__arrow')[0];
+    const searchInput = $('.account-and-search__input')[0];
+    const background = $('.background')[0];
     
     if (scrollY > 150) {
         header.style.height = '55px';
@@ -107,10 +108,10 @@ async function translate() {
     const request = new Request(requestURL);
     
     const response = await fetch(request);
-    languages = await response.json();
+    const langDatas = await response.json();
 
-    let langElems = document.querySelectorAll('[lang]')
-    dataReaload = document.querySelectorAll('[data-reload]')
+    langDataEn = langDatas.languages.en.strings;
+    langDataPt = langDatas.languages.pt.strings;
 
     for (let i = 0; i < langOptions.length; i++) {
 
@@ -118,14 +119,14 @@ async function translate() {
             for (let i = 0; i < langElems.length; i++) {
                 langElems[i].lang = 'en'
                 if (i > 0) {
-                    translatesContent('en', i)
+                    translatesContent(langDataEn, i)
                 }
             }
         } else if (window.location.hash === '#pt-br') {
             for (let i = 0; i < langElems.length; i++) {
                 langElems[i].lang = 'pt-BR'
                 if (i > 0) {
-                    translatesContent('pt', i)
+                    translatesContent(langDataPt, i)
                 }
             }
         }
@@ -137,14 +138,14 @@ async function translate() {
                 for (let i = 0; i < langElems.length; i++) {
                     langElems[i].lang = 'en'
                     if (i > 0) {
-                        translatesContent('en', i)
+                        translatesContent(langDataEn, i)
                     }
                 }
             } else if (chosenLanguage === 'Português') {
                 for (let i = 0; i < langElems.length; i++) {
                     langElems[i].lang = 'pt-BR'
                     if (i > 0) {
-                        translatesContent('pt', i)
+                        translatesContent(langDataPt, i)
                     }
                 }
             }
@@ -153,7 +154,7 @@ async function translate() {
     }
     window.addEventListener('hashchange', function() {
         if (chosenLanguage == '') {
-            this.window.location.reload(true)
+            window.location.reload(true)
         } else {
             defineLangAbbr();
         }
@@ -164,7 +165,7 @@ async function translate() {
 function placesMoviesCovers() {
     const gallery = document.querySelector('.flickity-slider');
     const galleryChildren = gallery.children
-    let currentLanguage = document.documentElement.lang
+    const currentLanguage = document.documentElement.lang
     if (currentLanguage == 'en') {
         for (let i = 0; i < galleryChildren.length; i++) {
             galleryChildren[i].style.backgroundImage = `url('./images/other-movies/en/movie${i+1}.webp')`;
@@ -176,27 +177,12 @@ function placesMoviesCovers() {
     }
 }
 
-function translatesContent(lang, langElemIndex) {
-    let langElems = document.querySelectorAll('[lang]')
-
-    let langDataEn = languages.languages.en.strings
-    let langDataPt = languages.languages.pt.strings
-
-    if (lang == 'en') {
-        if (langElems[langElemIndex].placeholder !== undefined) {
-            langElems[langElemIndex].placeholder = Object.values(langDataEn)[langElemIndex-1]
-        } else if (langElems[langElemIndex].alt !== undefined) {
-            langElems[langElemIndex].alt = Object.values(langDataEn)[langElemIndex-1]
-        } else {
-            langElems[langElemIndex].textContent = Object.values(langDataEn)[langElemIndex-1]
-        }
-    } else if (lang == 'pt') {
-        if (langElems[langElemIndex].placeholder !== undefined) {
-            langElems[langElemIndex].placeholder = Object.values(langDataPt)[langElemIndex-1]
-        } else if (langElems[langElemIndex].alt !== undefined) {
-            langElems[langElemIndex].alt = Object.values(langDataPt)[langElemIndex-1]
-        } else {
-            langElems[langElemIndex].textContent = Object.values(langDataPt)[langElemIndex-1]
-        }
+function translatesContent(langData, langElemIndex) {
+    if (langElems[langElemIndex].placeholder !== undefined) {
+        langElems[langElemIndex].placeholder = Object.values(langData)[langElemIndex-1]
+    } else if (langElems[langElemIndex].alt !== undefined) {
+        langElems[langElemIndex].alt = Object.values(langData)[langElemIndex-1]
+    } else {
+        langElems[langElemIndex].textContent = Object.values(langData)[langElemIndex-1]
     }
 }
