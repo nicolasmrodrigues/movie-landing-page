@@ -31,7 +31,7 @@
 }
 
 .gallery {
-    margin-top: 60px;
+    margin-top: 25px;
 
     @media (max-width: 768px) {
         margin-top: 40px;
@@ -81,6 +81,7 @@
     cursor: pointer;
     font-family: Roboto, sans-serif;
     font-weight: 500;
+    font-size: 16px;
     color: #f9f9f9;
     transition: all .3s ease-in-out;
 
@@ -113,10 +114,6 @@
 
 [data-tab-id="details"] {
     .tab {
-        font-size: 18px;
-        line-height: 28px;
-        color: #f9f9f9;
-
         &-content, &__movie-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -128,7 +125,7 @@
 
         &-content {
             gap: 24px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         &__movie-details {

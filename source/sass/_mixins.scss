@@ -1,5 +1,8 @@
 @mixin tab-config {
     display: none;
+    font-size: 18px;
+    line-height: 28px;
+    color: #f9f9f9;
     margin-top: 80px;
 
     @media (max-width: 768px) {

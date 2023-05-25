@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {    
-    const buttons = document.querySelectorAll('[data-tab-button]');
+    const buttons = $('[data-tab-button]');
     langOptions = $('.lang-option');
-    browserLanguage = window.navigator.language.slice(0, 2);
+    browserDefaultLanguage = window.navigator.language.slice(0, 2);
     chosenLanguage = '';
-    langElems = document.querySelectorAll('[lang]');
+    langElems = $('[lang]');
 
-    if (browserLanguage === 'pt' && !window.location.hash) {
+    if (browserDefaultLanguage === 'pt' && !window.location.hash) {
         window.location.hash = '#pt-br';
-    } else if (browserLanguage !== 'pt' && !window.location.hash){
+    } else if (browserDefaultLanguage !== 'pt' && !window.location.hash){
         window.location.hash = '#en';
     }
     
@@ -77,7 +77,7 @@ function changesHeaderSize() {
 }
 
 function hideTabs() {
-    const tabs = document.querySelectorAll('[data-tab-id]');
+    const tabs = $('[data-tab-id]');
 
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].children[0].classList.remove('tab--show');
@@ -85,7 +85,7 @@ function hideTabs() {
 }
 
 function removeActiveButton() {
-    const buttons = document.querySelectorAll('[data-tab-button]');
+    const buttons = $('[data-tab-button]');
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove('tab-navegation-button--is-active');
@@ -108,45 +108,32 @@ async function translate() {
     const request = new Request(requestURL);
     
     const response = await fetch(request);
-    const langDatas = await response.json();
+    const langData = await response.json();
 
-    langDataEn = langDatas.languages.en.strings;
-    langDataPt = langDatas.languages.pt.strings;
+    langDataEn = langData.languages.en.strings;
+    langDataPt = langData.languages.pt.strings;
+
+    if (window.location.hash === '#en') {
+        for (let i = 0; i < langElems.length; i++) {
+            translatesContent(langDataEn, i)
+        }
+    } else if (window.location.hash === '#pt-br') {
+        for (let i = 0; i < langElems.length; i++) {
+            translatesContent(langDataPt, i)
+        }
+    }
 
     for (let i = 0; i < langOptions.length; i++) {
-
-        if (window.location.hash === '#en') {
-            for (let i = 0; i < langElems.length; i++) {
-                langElems[i].lang = 'en'
-                if (i > 0) {
-                    translatesContent(langDataEn, i)
-                }
-            }
-        } else if (window.location.hash === '#pt-br') {
-            for (let i = 0; i < langElems.length; i++) {
-                langElems[i].lang = 'pt-BR'
-                if (i > 0) {
-                    translatesContent(langDataPt, i)
-                }
-            }
-        }
-
         langOptions[i].addEventListener('click', function() {
             chosenLanguage =  langOptions[i].innerHTML
             
             if (chosenLanguage === 'English') {
                 for (let i = 0; i < langElems.length; i++) {
-                    langElems[i].lang = 'en'
-                    if (i > 0) {
-                        translatesContent(langDataEn, i)
-                    }
+                    translatesContent(langDataEn, i)
                 }
-            } else if (chosenLanguage === 'Português') {
+            } else if (chosenLanguage ==='Português') {
                 for (let i = 0; i < langElems.length; i++) {
-                    langElems[i].lang = 'pt-BR'
-                    if (i > 0) {
-                        translatesContent(langDataPt, i)
-                    }
+                    translatesContent(langDataPt, i)
                 }
             }
         })
@@ -163,26 +150,33 @@ async function translate() {
 }
 
 function placesMoviesCovers() {
-    const gallery = document.querySelector('.flickity-slider');
-    const galleryChildren = gallery.children
-    const currentLanguage = document.documentElement.lang
-    if (currentLanguage == 'en') {
-        for (let i = 0; i < galleryChildren.length; i++) {
-            galleryChildren[i].style.backgroundImage = `url('./images/other-movies/en/movie${i+1}.webp')`;
-        }
-    } else {
-        for (let i = 0; i < galleryChildren.length; i++) {
-            galleryChildren[i].style.backgroundImage = `url('./images/other-movies/pt/movie${i+1}.webp')`;
-        }
+    const movies = $('.flickity-slider')[0].children
+    const currentLanguage = document.documentElement.lang.slice(0, 2)
+    
+    for (let i = 0; i < movies.length; i++) {
+        movies[i].style.backgroundImage = `url('./images/other-movies/${currentLanguage}/movie${i+1}.webp')`;
     }
 }
 
-function translatesContent(langData, langElemIndex) {
-    if (langElems[langElemIndex].placeholder !== undefined) {
-        langElems[langElemIndex].placeholder = Object.values(langData)[langElemIndex-1]
-    } else if (langElems[langElemIndex].alt !== undefined) {
-        langElems[langElemIndex].alt = Object.values(langData)[langElemIndex-1]
+function translatesContent(langData) {
+    let languageCode;
+
+    if (langData === langDataEn) {
+        languageCode = 'en'
     } else {
-        langElems[langElemIndex].textContent = Object.values(langData)[langElemIndex-1]
+        languageCode = 'pt-BR'
+    }
+    
+    for (let i = 0; i < langElems.length; i++) {
+        langElems[i].lang = languageCode
+        if (i !== 0) {
+            if (langElems[i].placeholder !== undefined) {
+                langElems[i].placeholder = Object.values(langData)[i-1]
+            } else if (langElems[i].alt !== undefined) {
+                langElems[i].alt = Object.values(langData)[i-1]
+            } else {
+                langElems[i].textContent = Object.values(langData)[i-1]
+            }
+        }
     }
 }
